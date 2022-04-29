@@ -10,11 +10,17 @@ function App() {
   function handleDarkModeClick() {
     setIsDarkMode((isDarkMode) => !isDarkMode);
   }
+  //create new array that does not modify our original array, using our setter to update state. Anytime our new state relies upon our old state, we need to do a function that receives that state as an argument (example below)
+  const addItem = (newItem) => {
+    setItems((currentItems) => {
+      return [...currentItems, newItem];
+    });
+  };
 
   return (
     <div className={"App " + (isDarkMode ? "dark" : "light")}>
       <Header isDarkMode={isDarkMode} onDarkModeClick={handleDarkModeClick} />
-      <ShoppingList items={items} />
+      <ShoppingList items={items} addItem={addItem} />
     </div>
   );
 }
